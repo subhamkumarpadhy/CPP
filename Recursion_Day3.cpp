@@ -117,5 +117,13 @@ int main()
     cout << "FALSE";
     */
 
-    cout << "Present or not " << binarySearch(arr, 0, 5, key);
+    bool ans = binarySearch(arr, 0, 5, key);
+    if (ans)
+    {
+        cout << "The element is present in the array ";
+    }
+    else
+    {
+        cout << "The element is not present in the array ";
+    }
 }
