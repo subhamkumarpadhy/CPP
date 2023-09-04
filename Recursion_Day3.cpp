@@ -35,6 +35,7 @@ int getSum(int* arr,int size)
     }
 }*/
 
+/*
 // Linear Search using Recursion
 void print(int arr[],int n)
 {
@@ -62,12 +63,36 @@ bool getKey(int* arr , int size , int key)
         return remainingPart;
     }
 
+}*/
+
+// Binary Search with the help of Recursion
+bool binarySearch(int *arr, int s, int e, int k)
+{
+    if (s > e)
+    {
+        return false;
+    }
+    int mid = s + (e - s) / 2;
+
+    if (arr[mid] == k)
+    {
+        return true;
+    }
+    
+    if (arr[mid] < k)
+    {
+        return binarySearch(arr, mid + 1, e, k);
+    }
+    else
+    {
+        return binarySearch(arr, s, mid - 1, k);
+    }
 }
 int main()
 {
-    int arr[6] = {1,2,4,5,7,6};
+    int arr[6] = {1,2,4,5,6,9};
     int n = 6;
-    int key = 9;
+    int key = 10;
 
     /*bool ans = isSorted(arr,n);
     if (ans)
@@ -83,11 +108,14 @@ int main()
     cout << "The sum is " << ans << endl ;
     */
 
-    bool ans = getKey(arr,n,key);
+    /*bool ans = getKey(arr,n,key);
     if (ans)
     {
         cout << "TRUE";
     }
     else
     cout << "FALSE";
+    */
+
+    cout << "Present or not " << binarySearch(arr, 0, 5, key);
 }
