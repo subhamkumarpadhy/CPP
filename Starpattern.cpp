@@ -581,37 +581,37 @@
 //      }
 //  }
 //  DABANG PATTERN
-// #include <iostream>
-// using namespace std;
-// int main()
-// {
-//     int n;
-//     cout << "Enter row & column number ";
-//     cin >> n;
-//     int i = 1;
-//     while (i <= n)
-//     {
-//         int start = 1;
-//         int j = n - i + 1;
-//         while (j > 0)
-//         {
-//             cout << start << " ";
-//             j = j - 1;
-//             start = start + 1;
-//         }
-//         int space = ((2 * i) - 2);
-//         while (space)
-//         {
-//             cout << "*" << " ";
-//             space = space - 1;
-//         }
-//         int k = n - i + 1;
-//         while (k > 0)
-//         {
-//             cout << k << " ";
-//             k = k - 1;
-//         }
-//         cout << endl;
-//         i = i + 1;
-//     }
-// }
+#include <iostream>
+using namespace std;
+int main()
+{
+    int n;
+    cout << "Enter row & column number ";
+    cin >> n;
+    int i = 1;
+    while (i <= n)
+    {
+        int start = 1;
+        int j = n - i + 1;
+        while (j > 0)
+        {
+            cout << start << " ";
+            j = j - 1;
+            start = start + 1;
+        }
+        int space = ((2 * i) - 2);
+        while (space)
+        {
+            cout << "*" << " ";
+            space = space - 1;
+        }
+        int k = n - i + 1;
+        while (k > 0)
+        {
+            cout << k << " ";
+            k = k - 1;
+        }
+        cout << endl;
+        i = i + 1;
+    }
+}
