@@ -1,27 +1,35 @@
-#include <vector>
+#include<iostream>
 using namespace std;
-void bubbleSort(vector<int> &arr, int n)
-{
-    for (int i = 1; i < n; i++)
-    {
-        // for round 1 to n-1
-        bool swapped = false;
 
-        for (int j = 0; j < n - i; j++)
-        {
-
-            // process element till n-i th index
-            if (arr[j] > arr[j + 1])
-            {
-                swap(arr[j], arr[j + 1]);
-                swapped = true;
+void insertionSort(int n, int *arr){
+    
+    for(int i = 1; i<n; i++) {
+        int temp = arr[i];
+        int j = i-1;
+        for(; j>=0; j--) {
+            
+            if(arr[j] > temp) {
+                //shift
+                arr[j+1] = arr[j];
             }
+            else { // ruk jao
+                break;
+            }
+            
         }
+        //copy temp value
+        arr[j+1] = temp;  
+    } 
+}
 
-        if (swapped == false)
-        {
-            // already sorted
-            break;
-        }
+int main()
+{
+    int arr[8] = {1,85,4,7,966,2,4,67};
+    int n = 8;
+    insertionSort(n, arr);
+    for (int i = 0; i < n; i++)
+    {
+        cout << i[arr] << " ";
     }
+    
 }
