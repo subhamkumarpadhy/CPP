@@ -1,4 +1,4 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
 
 // Reversr a String
@@ -20,7 +20,7 @@ using namespace std;
     {
         return true;
     }
-    
+
     if (str[i] != str[j])
     {
         return false;
@@ -75,7 +75,7 @@ using namespace std;
         }
     }
     swap(arr[0],arr[index]);
-    selectionSort(arr + 1, size - 1);    
+    selectionSort(arr + 1, size - 1);
 }*/
 
 // BubbleSort with the help of Recursion
@@ -96,15 +96,31 @@ using namespace std;
 }*/
 
 // InsertionSort by Recursion
-void insertionSort(int *arr, int n)
-{
-    if (size == 0 || size == 1)
-    {
+void insertionSort(int arr[], int n) { 
+    // Base case 
+    if (n <= 1) 
         return;
-    }
-    
+    // Sort first n-1 elements 
+    insertionSort( arr, n-1 );
+    // Initialization the last value to the variable val
+    int val = arr[n-1];
+    // Pos is the index of n-2 element's
+    int pos = n-2;
+    // Condition for placing the last value to it's correct position
+    while (pos >= 0 && arr[pos] > val) { 
+        /* Pos+1 means it is now at the n-1 index.
+        So at n-1 index we place the value of arr[pos].*/
+        arr[pos+1] = arr[pos];
+        // Now as pos is at n-2 initially so pos-1 means it's now at pos-3(index)
+        pos = pos - 1;
+    } 
+    /*Now as pos is at n-3 index soo pos+1 means index at n-2.
+    So now we place the value of val at this place, as it is replaced in the above. */ 
+    arr[pos+1] = val;
 }
-int main(){
+
+int main()
+{
     // string name = "madam";
 
     /*reverseString(0, name.length() - 1 , name);
@@ -125,13 +141,14 @@ int main(){
     int ans = power(a,b);
     cout << "Answer is " << ans << endl;*/
 
-    int arr[100] = {5,47,2,4,9};
+    int arr[100] = {5, 47, 2, 4, 9};
     int n = 5;
     // selectionSort(arr,n);
-    
+
     // bubbleSort(arr,n);
 
-    InsertionSort(arr,n);
+    insertionSort(arr, n);
+
     for (int i = 0; i < n; i++)
     {
         cout << arr[i] << " ";
@@ -142,6 +159,5 @@ int main(){
 
 /*H.W.
 Q. Reverse the string using only one pointer? Hint = n - i - 1;
-Q. Find if the string is palindrome or not using only one pointer? 
-Q. Using Recursion do BUBBLE,INSERTION,SELECTION SORT?
+Q. Find if the string is palindrome or not using only one pointer?
 */
