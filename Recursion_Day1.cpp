@@ -34,10 +34,10 @@ void print(int n)
     if(n==0)
     return;
     //To print the number in decending order
-    // cout << n << endl;
+    cout << n << endl;
     print(n-1);
     //To print the number in ascending order
-    cout << n << endl;
+    // cout << n << endl;
     return;
 }
 int main()
