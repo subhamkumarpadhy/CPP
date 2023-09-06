@@ -24,8 +24,8 @@ void insertionSort(int n, int *arr){
 
 int main()
 {
-    int arr[8] = {1,85,4,7,966,2,4,67};
-    int n = 8;
+    int n = 5;
+    int arr[n] = {1,85,4,7,6};
     insertionSort(n, arr);
     for (int i = 0; i < n; i++)
     {

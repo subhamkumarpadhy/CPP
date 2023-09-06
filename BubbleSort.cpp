@@ -26,8 +26,8 @@ void bubbleSort(int* arr, int n)
 
 int main()
 {
-    int arr[8] = {1,85,4,7,966,2,4,67};
-    int n = 8;
+    int n = 10;
+    int arr[n] = {1,85,4,7,96,2,4,67,102,456};
     bubbleSort(arr,n);
     for (int i = 0; i < n; i++)
     {
