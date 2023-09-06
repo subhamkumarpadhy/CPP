@@ -15,23 +15,23 @@ void merge(int *arr, int s, int e)
     int *second = new int[len2];
 
     // copy values of left array to a new array
-    int index = s;
+    int mainArrayIndex = s;
     for (int i = 0; i < len1; i++)
     {
-        first[i] = arr[index++];
+        first[i] = arr[mainArrayIndex++];
     }
     
     // copy values of right array to a new array
-    index = mid + 1;
+    mainArrayIndex = mid + 1;
     for (int i = 0; i < len2; i++)
     {
-        second[i] = arr[index++];
+        second[i] = arr[mainArrayIndex++];
     }
 
     // merge 2 sorted arrays
     int index1 = 0;
     int index2 = 0;
-    index = s;
+    mainArrayIndex = s;
     
     // Condition for not getting the arraor of index out of bound error
     while (index1 < len1 && index2 < len2)
@@ -39,24 +39,24 @@ void merge(int *arr, int s, int e)
         // Merge the arrays
         if (first[index1] < second[index2])
         {
-            arr[index++] = first[index1++];
+            arr[mainArrayIndex++] = first[index1++];
         }
         else
         {
-            arr[index++] = second[index2++];
+            arr[mainArrayIndex++] = second[index2++];
         }
     }
 
     // Checking if any element is there in the 1st array, if there then merge it into the main array
     while (index1 < len1)
     {
-        arr[index++] = first[index1++];
+        arr[mainArrayIndex++] = first[index1++];
     }
 
     // Checking if element is there in the 2nd array, if there then merge it into the main array
     while (index2 < len2)
     {
-        arr[index++] = second[index2++];
+        arr[mainArrayIndex++] = second[index2++];
     }
 
     // Delected the dynamically created arrays for freeing the memory space
