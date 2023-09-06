@@ -18,8 +18,9 @@ int main()
     reachHome(src, dest);
     cout << endl;
 }*/
-/*
+
 // Number of ways to reach N-th stair
+/*
 #include <bits/stdc++.h>
 int countDistinctWays(int nStairs)
 {
