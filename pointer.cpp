@@ -187,7 +187,7 @@ int getSum(int *arr, int n)
 {
 
     cout << endl
-         << "Size : " << sizeof(arr) << endl;
+        << "Size : " << sizeof(arr) << endl;
 
     int sum = 0;
     for (int i = 0; i < n; i++)
