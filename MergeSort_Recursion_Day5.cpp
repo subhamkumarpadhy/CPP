@@ -3,54 +3,63 @@ using namespace std;
 
 void merge(int *arr, int s, int e)
 {
+    // Finding the mid to divide the array into 2 parts according to the algorithm of merge sort
     int mid = s + (e - s) / 2;
 
+    // Creating the lengths of LEFT & RIGHT sub array
     int len1 = mid - s + 1;
     int len2 = e - mid;
-
+    
+    // Dynamically creating 2 new array to copy the elements from the main array to these arrays
     int *first = new int[len1];
     int *second = new int[len2];
 
-    // copy values
-    int mainArrayIndex = s;
+    // copy values of left array to a new array
+    int index = s;
     for (int i = 0; i < len1; i++)
     {
-        first[i] = arr[mainArrayIndex++];
+        first[i] = arr[index++];
     }
-
-    mainArrayIndex = mid + 1;
+    
+    // copy values of right array to a new array
+    index = mid + 1;
     for (int i = 0; i < len2; i++)
     {
-        second[i] = arr[mainArrayIndex++];
+        second[i] = arr[index++];
     }
 
     // merge 2 sorted arrays
     int index1 = 0;
     int index2 = 0;
-    mainArrayIndex = s;
-
+    index = s;
+    
+    // Condition for not getting the arraor of index out of bound error
     while (index1 < len1 && index2 < len2)
     {
+        // Merge the arrays
         if (first[index1] < second[index2])
         {
-            arr[mainArrayIndex++] = first[index1++];
+            arr[index++] = first[index1++];
         }
         else
         {
-            arr[mainArrayIndex++] = second[index2++];
+            arr[index++] = second[index2++];
         }
     }
 
+    // Checking if any element is there in the 1st array, if there then merge it into the main array
     while (index1 < len1)
     {
-        arr[mainArrayIndex++] = first[index1++];
+        arr[index++] = first[index1++];
     }
 
+    // Checking if element is there in the 2nd array, if there then merge it into the main array
     while (index2 < len2)
     {
-        arr[mainArrayIndex++] = second[index2++];
+        arr[index++] = second[index2++];
     }
 
+    // Delected the dynamically created arrays for freeing the memory space
     delete[] first;
     delete[] second;
 }
