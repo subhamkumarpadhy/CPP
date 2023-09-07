@@ -101,3 +101,12 @@ int main()
 
     return 0;
 }
+/*Q. Why the T.C. of MergeSort is nlogn?
+--> Coz if we see the algorithm of mergeSort then we can observe that 
+    it shows the patterns of a balanced binary tree. So from that we 
+    can say the height of the tree is logN & if we observe the number 
+    of operations at each level is N. so the time complexity of 
+    MergeSort = height of the tree X no. of operations at each level;
+    MergeSort = logN X N = N(logN).(It is same for all the cases)
+    S.C. = O(N)
+    */
