@@ -44,6 +44,14 @@ Q. How to access the Data members?
 --> Static functions: No need to creating obj for accesing it. We can access it by it's class name only. They don't have 'this' keyword.
                     It only access the static members only. If we try to access the non-static members in this function then it will 
                     generate error.
+
+--> Const keyword : It has to be initialized while declearing it. Ex: const int var = 9. If we don't initialize then we will get error.
+                    More on gfg article: https://www.geeksforgeeks.org/const-keyword-in-cpp/
+
+--> Initializer list in cpp: https://www.geeksforgeeks.org/when-do-we-use-initializer-list-in-c/
+
+--> Padding, Member allignment, Data packing: https://www.geeksforgeeks.org/structure-member-alignment-padding-and-data-packing/
+
     */
 
 
