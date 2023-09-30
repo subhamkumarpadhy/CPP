@@ -52,8 +52,8 @@ Q. How to access the Data members?
 
 --> Padding, Member allignment, Data packing: https://www.geeksforgeeks.org/structure-member-alignment-padding-and-data-packing/
 
-    */
 
+    */
 
 
 #include<iostream>
