@@ -1,6 +1,3 @@
-/*  */
-
-
 #include<iostream>
 using namespace std;
 
@@ -10,10 +7,23 @@ class Node {
     int data;
     Node* next;
 
+    // Constructor
     Node(int data) {
         this -> data = data;
         this -> next = NULL;
     }
+
+    // Destructor
+    ~Node() {
+        int value = this -> data;
+        if (this -> next != NULL)
+        {
+            delete next;
+            this -> next = NULL;
+        }
+        cout << "Memory is free for node with data " << value << endl;
+    }
+
 };
 
 
@@ -87,10 +97,43 @@ void insertAtMiddle(Node* &tail, Node* &head, int position, int data) {
 
 }
 
+
+void deleteNode(int position, Node* &head) {
+
+    // Deleting the first node
+    if (position == 1) {
+        Node* temp = head;
+        head = head -> next;
+
+        // Release the memory of 1st node
+        temp -> next = NULL;
+        delete temp;
+    }
+
+    // Deleting at any middle node or last node
+    else {
+
+        // Creating 2 nodes
+        Node* current = head;
+        Node* previous = NULL;
+
+        int cnt = 1;
+        while (cnt < position)
+        {
+            previous = current;
+            current = current -> next;
+            cnt++;
+        }
+        previous -> next = current -> next;
+
+        current -> next = NULL;
+        delete current;
+    }
+}
 int main() {
 
     // created a new node
-    Node* node1 = new Node(50);
+    Node* node1 = new Node(10);
 
     // cout << node1 -> data << endl;
     // cout << node1 -> next << endl;
@@ -108,12 +151,15 @@ int main() {
     // print(head);
 
     print(head);
-    insertAtTail(tail, 53);
+    insertAtTail(tail, 12);
     print(head);
-    insertAtTail(tail, 55);
+    insertAtTail(tail, 15);
     print(head);
 
-    insertAtMiddle(tail, head, 2, 54);
+    insertAtMiddle(tail, head, 4, 22);
+    print(head);
+
+    deleteNode(3, head);
     print(head);
 
     return 0;
