@@ -215,6 +215,7 @@ void print(Node* &head) {
 void insertAtHead(Node* &tail, Node* &head, int data) {
 
     // To handle the empty list case
+
     if (head == NULL)
     {
         Node* temp = new Node(data);
@@ -233,6 +234,7 @@ void insertAtHead(Node* &tail, Node* &head, int data) {
 void insertAtTail(Node* &tail, Node* &head, int data) {
 
     // To handle the empty list case
+
     if (head == NULL)
     {
         Node* temp = new Node(data);
@@ -250,7 +252,9 @@ void insertAtTail(Node* &tail, Node* &head, int data) {
 
 
 void insertAtMiddle(Node* &tail, Node* &head, int position, int data) {
+
     // Insearting at start case handle
+
     if (position == 1)
     {
         insertAtHead(tail, head, data);
@@ -266,12 +270,12 @@ void insertAtMiddle(Node* &tail, Node* &head, int position, int data) {
     }
 
     // Insearting at tail case handle
+
     if (temp -> next == NULL)
     {
         insertAtTail(tail, head, data);
         return;
     }
-    
     
      // Creating a new node
     Node* nodeToInsert = new Node(data);
@@ -284,6 +288,7 @@ void insertAtMiddle(Node* &tail, Node* &head, int position, int data) {
 }
 
 // Function to get the length of a Linked List
+
 int getLength(Node* &head) {
     int length = 0;
     Node* temp = head;
@@ -299,6 +304,7 @@ int getLength(Node* &head) {
 void deleteNode(int position, Node* &head) {
 
     // Deleting the first node
+
     if (position == 1) {
         Node* temp = head;
         temp -> next -> pre = NULL;
@@ -308,6 +314,7 @@ void deleteNode(int position, Node* &head) {
     }
 
     // Deleting at any middle node or last node
+
     else {
 
         // Creating 2 nodes
@@ -363,6 +370,152 @@ int main() {
 
     deleteNode(, head);
     print(head);
+
+    return 0;
+}
+
+*/
+
+/*
+
+    // Concepts of Circular Linked List
+
+#include<iostream>
+using namespace std;
+
+class Node {
+    public:
+    int data;
+    Node* next;
+
+    Node(int data) {
+        this -> data = data;
+        this -> next = NULL;
+    }
+
+    ~Node() {
+        int value = this -> data;
+        if (this -> next != NULL)
+        {
+            delete next;
+            next = NULL;
+        }
+        cout << "Memory free for node with value " << value << endl;
+    }
+};
+
+void insertNode(Node* &tail, int element, int d) {
+
+    // If list is empty
+
+    if (tail == NULL) {
+
+        Node* temp = new Node(d);
+        tail = temp;
+        temp -> next = tail;
+    }
+    else {
+
+         // For non-empty list
+        //Assuming the given element is present in the list
+        Node* curr = tail;
+        while (curr -> data != element)
+        {
+            curr = curr -> next;
+        }
+        
+        // Element found
+        Node* temp = new Node(d);
+        temp -> next = curr -> next;
+        curr -> next = temp;
+    }
+    
+}
+
+void deleteNode(Node* &tail, int value) {
+
+    // List is empty
+    if (tail == NULL) {
+
+        cout << "The list is empty, please check again." << endl;
+        return;
+    }
+    
+    else {
+
+        // Assuming that the value is present in the list
+
+        Node* prev = tail;
+        Node* curr = prev -> next;
+
+        while (curr -> data != value)
+        {
+            prev = curr;
+            curr = curr -> next;
+        }
+        
+        prev -> next = curr -> next;
+        
+        // It is for 1 node
+        if (curr == prev)
+        {
+            tail = NULL;
+        }
+        
+
+        // It is for >= 2 nodes
+        if (tail == curr)
+        {
+            tail = prev;
+        }
+        
+        curr -> next = NULL;
+        delete curr;
+    }
+}
+
+void print(Node* tail) {
+
+    Node* temp = tail;
+
+    // Empty list
+    if (tail == NULL)
+    {
+        cout << "List is empty." << endl;
+        return;
+    }
+    
+    do
+    {
+        cout << tail -> data << " ";
+        tail = tail -> next;
+    } while (tail != temp);
+
+    cout << endl;
+    
+}
+int main()
+{
+    Node* tail = NULL;
+
+    insertNode(tail, 5, 3);
+    print(tail);
+    insertNode(tail, 3, 5);
+    print(tail);
+    insertNode(tail, 5, 7);
+    print(tail);
+    insertNode(tail, 7, 9);
+    print(tail);
+    insertNode(tail, 5, 6);
+    print(tail);
+    insertNode(tail, 9, 10);
+    print(tail);
+    insertNode(tail, 3, 4);
+    print(tail);
+
+
+    deleteNode(tail, 5);
+    print(tail);
 
     return 0;
 }
