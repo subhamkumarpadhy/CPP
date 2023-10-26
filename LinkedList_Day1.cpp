@@ -67,21 +67,15 @@ void print(Node* &head) {
 }
 
 // Function to add an element at the middle of a linkedlist
-void insertAtMiddle(Node* &tail, Node* &head, int position, int data) {
+void insertAtMiddle(Node* &head, Node* &tail, int position, int data) {
+
+    Node* temp = head;
 
     // Insearting at start case handle
     if (position == 1)
     {
         insertAtHead(head, data);
         return;
-    }
-    
-    Node* temp = head;
-    int cnt = 1;
-    while (cnt < position - 1)
-    {
-        temp = temp -> next;
-        cnt++;
     }
 
     // Insearting at tail case handle
@@ -91,7 +85,13 @@ void insertAtMiddle(Node* &tail, Node* &head, int position, int data) {
         return;
     }
     
-    
+    int cnt = 1;
+    while (cnt < position - 1)
+    {
+        temp = temp -> next;
+        cnt++;
+    }
+
      // Creating a new node
     Node* nodeToInsert = new Node(data);
 
@@ -101,7 +101,7 @@ void insertAtMiddle(Node* &tail, Node* &head, int position, int data) {
 }
 
 
-void deleteNode(int position, Node* &head) {
+void deleteNode(Node* &head, int position) {
 
     // Deleting the first node
     if (position == 1) {
@@ -113,7 +113,7 @@ void deleteNode(int position, Node* &head) {
         delete temp;
     }
 
-    // Deleting at any middle node or last node
+    // Deleting any middle node or last node
     else {
 
         // Creating 2 nodes
@@ -144,7 +144,7 @@ int main() {
     // Created a new pointer head & pointing to node1
     Node* head = node1;
 
-    // Created a new pointer head & pointing to node1
+    // Created a new pointer tail & pointing to node1
     Node* tail = node1;
 
     // print(head);
@@ -159,10 +159,10 @@ int main() {
     insertAtTail(tail, 15);
     print(head);
 
-    insertAtMiddle(tail, head, 4, 22);
+    insertAtMiddle(head, tail, 4, 22);
     print(head);
 
-    deleteNode(3, head);
+    deleteNode(head, 3);
     print(head);
 
     return 0;
@@ -222,6 +222,7 @@ void insertAtHead(Node* &tail, Node* &head, int data) {
         head = temp;
         tail = temp;
     }
+
     else
     {
         Node* temp = new Node(data);
@@ -241,6 +242,7 @@ void insertAtTail(Node* &tail, Node* &head, int data) {
         head = temp;
         tail = temp;
     }
+
     else
     {
         Node* temp = new Node(data);
@@ -253,6 +255,8 @@ void insertAtTail(Node* &tail, Node* &head, int data) {
 
 void insertAtMiddle(Node* &tail, Node* &head, int position, int data) {
 
+    Node* temp = head;
+
     // Insearting at start case handle
 
     if (position == 1)
@@ -261,14 +265,6 @@ void insertAtMiddle(Node* &tail, Node* &head, int position, int data) {
         return;
     }
     
-    Node* temp = head;
-    int cnt = 1;
-    while (cnt < position - 1)
-    {
-        temp = temp -> next;
-        cnt++;
-    }
-
     // Insearting at tail case handle
 
     if (temp -> next == NULL)
@@ -277,6 +273,13 @@ void insertAtMiddle(Node* &tail, Node* &head, int position, int data) {
         return;
     }
     
+    int cnt = 1;
+    while (cnt < position - 1)
+    {
+        temp = temp -> next;
+        cnt++;
+    }
+
      // Creating a new node
     Node* nodeToInsert = new Node(data);
 
@@ -290,6 +293,7 @@ void insertAtMiddle(Node* &tail, Node* &head, int position, int data) {
 // Function to get the length of a Linked List
 
 int getLength(Node* &head) {
+
     int length = 0;
     Node* temp = head;
     while (temp != NULL)
@@ -313,7 +317,7 @@ void deleteNode(int position, Node* &head) {
         delete temp;
     }
 
-    // Deleting at any middle node or last node
+    // Deleting any middle node or last node
 
     else {
 
@@ -368,7 +372,7 @@ int main() {
     insertAtMiddle(tail, head, 5, 86);
     print(head);
 
-    deleteNode(, head);
+    deleteNode(1, head);
     print(head);
 
     return 0;
@@ -414,10 +418,13 @@ void insertNode(Node* &tail, int element, int d) {
         tail = temp;
         temp -> next = tail;
     }
+
     else {
 
-         // For non-empty list
+    // For non-empty list
+
         //Assuming the given element is present in the list
+
         Node* curr = tail;
         while (curr -> data != element)
         {
@@ -494,6 +501,7 @@ void print(Node* tail) {
     cout << endl;
     
 }
+
 int main()
 {
     Node* tail = NULL;
@@ -512,7 +520,6 @@ int main()
     print(tail);
     insertNode(tail, 3, 4);
     print(tail);
-
 
     deleteNode(tail, 5);
     print(tail);
