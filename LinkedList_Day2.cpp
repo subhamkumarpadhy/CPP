@@ -4,9 +4,8 @@ Q.Reverse the linked list->sloved with 3 approaches
 
         // Approach - 3
 
-        Node *
-        reverse1(Node *&head)
-{
+Node * reverse1(Node *&head) {
+    
     if (head == NULL || head->next == NULL)
     {
         return head;
