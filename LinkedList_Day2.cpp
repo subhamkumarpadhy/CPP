@@ -1,11 +1,13 @@
 Solved two problems on code studio
 
-Q.Reverse the linked list->sloved with 3 approaches
+    Q.Reverse the linked list->sloved with 3 approaches
 
         // Approach - 3
 
-Node * reverse1(Node *&head) {
-    
+        Node *
+        reverse1(Node *&head)
+{
+
     if (head == NULL || head->next == NULL)
     {
         return head;
@@ -76,7 +78,9 @@ Node *reverseLinkedList(Node *head)
 
 Q.Find the middle element of the given LinkedList
 
-Node * getMiddle(Node *head) {
+    Node *
+    getMiddle(Node *head)
+{
 
     if (head == NULL || head->next == NULL)
     {
@@ -111,7 +115,8 @@ int getLength(Node *head) {
 
 */
 
-Node *findMiddle(Node *head) {
+Node *findMiddle(Node *head)
+{
 
     return getMiddle(head);
 
@@ -129,4 +134,27 @@ Node *findMiddle(Node *head) {
     return temp;
 
     */
+}
+
+Q.Reverse the Doubly linked list
+
+Node * reverseDLL(Node *head) {
+
+    if (head == NULL || head->next == NULL)
+    {
+
+        return head;
+    }
+
+    Node *returnedHead = reverseDLL(head->next);
+
+    head->next->next = head;
+
+    head->next->prev = head->next->next;
+
+    head->prev = head->next;
+
+    head->next = NULL;
+
+    return returnedHead;
 }
