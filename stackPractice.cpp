@@ -364,19 +364,25 @@ int findMinimumCost(string str)
 #include <stack>
 vector<int> nextSmallerElement(vector<int> &arr, int n)
 {
+    //create an empty stack
     stack<int> s;
+    //First we push -1 to the stack
     s.push(-1);
+    //created an vector of int type & size of the vector is n
     vector<int> ans(n);
 
+    //checking the stack from it's backward side
     for (int i = n - 1; i >= 0; i--)
     {
         int curr = arr[i];
+        //pop the elements until you get small element than the curr element
         while (s.top() >= curr)
         {
             s.pop();
         }
         // ans is stack ka top
         ans[i] = s.top();
+        //push the curr element into the stack
         s.push(curr);
     }
     return ans;
