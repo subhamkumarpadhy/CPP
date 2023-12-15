@@ -360,32 +360,274 @@ int findMinimumCost(string str)
     return ans;
 }
 
-//Next Smaller Element
+// Next Smaller Element
 #include <stack>
 vector<int> nextSmallerElement(vector<int> &arr, int n)
 {
-    //create an empty stack
+    // create an empty stack
     stack<int> s;
-    //First we push -1 to the stack
+    // First we push -1 to the stack
     s.push(-1);
-    //created an vector of int type & size of the vector is n
+    // created an vector of int type & size of the vector is n
     vector<int> ans(n);
 
-    //checking the stack from it's backward side
+    // checking the stack from it's backward side
     for (int i = n - 1; i >= 0; i--)
     {
         int curr = arr[i];
-        //pop the elements until you get small element than the curr element
+        // pop the elements until you get small element than the curr element
         while (s.top() >= curr)
         {
             s.pop();
         }
         // ans is stack ka top
         ans[i] = s.top();
-        //push the curr element into the stack
+        // push the curr element into the stack
         s.push(curr);
     }
     return ans;
 }
 
-//Largest Rectangular area in Histogram
+// Largest Rectangular area in Histogram
+class Solution
+{
+private:
+    vector<int> nextSmallerElement(vector<int> arr, int n)
+    {
+        stack<int> s;
+        s.push(-1);
+        vector<int> ans(n);
+        for (int i = n - 1; i >= 0; i--)
+        {
+            int curr = arr[i];
+            while (s.top() != -1 && arr[s.top()] >= curr)
+            {
+                s.pop();
+            }
+            ans[i] = s.top();
+            s.push(i);
+        }
+        return ans;
+    }
+
+    vector<int> prevSmallerElement(vector<int> arr, int n)
+    {
+        stack<int> s;
+        s.push(-1);
+        vector<int> ans(n);
+        for (int i = 0; i < n; i++)
+        {
+            int curr = arr[i];
+            while (s.top() != -1 && arr[s.top()] >= curr)
+            {
+                s.pop();
+            }
+            ans[i] = s.top();
+            s.push(i);
+        }
+        return ans;
+    }
+
+public:
+    int largestRectangleArea(vector<int> &heights)
+    {
+        int n = heights.size();
+
+        vector<int> next(n);
+        next = nextSmallerElement(heights, n);
+
+        vector<int> prev(n);
+        prev = prevSmallerElement(heights, n);
+        
+        int area = INT_MIN;
+        for (int i = 0; i < n; i++)
+        {
+            int l = heights[i];
+            if (next[i] == -1)
+            {
+                next[i] = n;
+            }
+
+            int b = next[i] - prev[i] - 1;
+            int newArea = l * b;
+            area = max(area, newArea);
+        }
+        return area;
+    }
+};
+
+// The celebrity problem
+class Solution
+{
+private:
+    bool knows(vector<vector<int>> &M, int a, int b)
+    {
+        if (M[a][b] == 1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+public:
+    // Function to find if there is a celebrity in the party or not.
+    int celebrity(vector<vector<int>> &M, int n)
+    {
+        stack<int> s;
+
+        // step:1 push all elements to the stack
+        for (int i = 0; i < n; i++)
+        {
+            s.push(i);
+        }
+
+        // step:2 get 2 elements and compare them
+        while (s.size() > 1)
+        {
+            int a = s.top();
+            s.pop();
+            int b = s.top();
+            s.pop();
+
+            if (knows(M, a, b))
+            {
+                s.push(b);
+            }
+            else
+            {
+                s.push(a);
+            }
+        }
+
+        int ans = s.top();
+        // step:3 single element in stack is potential celebrity
+        // so verify it
+
+        // row check
+        int zeroCount = 0;
+        for (int i = 0; i < n; i++)
+        {
+            if (M[ans][i] == 0)
+            {
+                zeroCount++;
+            }
+        }
+
+        // all zeros
+        if (zeroCount != n)
+        {
+            return -1;
+        }
+
+        // column check
+        int oneCount = 0;
+        for (int i = 0; i < n; i++)
+        {
+            if (M[i][ans] == 1)
+            {
+                oneCount++;
+            }
+        }
+
+        // all ones
+        if (oneCount != n - 1)
+        {
+            return -1;
+        }
+
+        return ans;
+    }
+};
+
+// max rectangle
+class Solution
+{
+
+private:
+    vector<int> nextSmallerElement(int *arr, int n)
+    {
+        stack<int> s;
+        s.push(-1);
+        vector<int> ans(n);
+
+        for (int i = n - 1; i >= 0; i--)
+        {
+            int curr = arr[i];
+            while (s.top() != -1 && arr[s.top()] >= curr)
+            {
+                s.pop();
+            }
+            // ans is stack ka top
+            ans[i] = s.top();
+            s.push(i);
+        }
+        return ans;
+    }
+
+    vector<int> prevSmallerElement(int *arr, int n)
+    {
+        stack<int> s;
+        s.push(-1);
+        vector<int> ans(n);
+
+        for (int i = 0; i < n; i++)
+        {
+            int curr = arr[i];
+            while (s.top() != -1 && arr[s.top()] >= curr)
+            {
+                s.pop();
+            }
+            // ans is stack ka top
+            ans[i] = s.top();
+            s.push(i);
+        }
+        return ans;
+    }
+
+    int largestRectangleArea(int *heights, int n)
+    {
+        vector<int> next(n);
+        next = nextSmallerElement(heights, n);
+
+        vector<int> prev(n);
+        prev = prevSmallerElement(heights, n);
+
+        int area = INT_MIN;
+        for (int i = 0; i < n; i++)
+        {
+            int l = heights[i];
+            if (next[i] == -1)
+            {
+                next[i] = n;
+            }
+            int b = next[i] - prev[i] - 1;
+            int newArea = l * b;
+            area = max(area, newArea);
+        }
+        return area;
+    }
+
+public:
+    int maxArea(int M[MAX][MAX], int n, int m)
+    {
+        int area = largestRectangleArea(M[0], m);
+
+        for (int i = 1; i < n; i++)
+        {
+            for (int j = 0; j < m; j++)
+            {
+                // row udpate: by adding previous row's value
+                if (M[i][j] != 0)
+                    M[i][j] = M[i][j] + M[i - 1][j];
+                else
+                    M[i][j] = 0;
+            }
+            // entire row is updated now
+            area = max(area, largestRectangleArea(M[i], m));
+        }
+        return area;
+    }
+};
