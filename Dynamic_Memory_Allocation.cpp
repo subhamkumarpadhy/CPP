@@ -121,7 +121,7 @@ int main()
     {
         for (int j = 0; j < col; j++)
         {
-            cin >> arr[i][j];
+            cin >> arr[i][j]; //Taking input for the matrix
         }
     }
 
@@ -131,7 +131,7 @@ int main()
     {
         for (int j = 0; j < col; j++)
         {
-            cout << arr[i][j] << " ";
+            cout << arr[i][j] << " "; //Printing the output
         }
         cout << endl;
     }
@@ -139,9 +139,9 @@ int main()
     // releasing memory
     for (int i = 0; i < row; i++)
     {
-        delete[] arr[i];
+        delete[] arr[i]; //Destroying the number of rows in array
     }
-    delete[] arr;
+    delete[] arr; //Destroyed the complete array
 
     // What learned in this chapter:-
     // how to create a 2D array dynamically
