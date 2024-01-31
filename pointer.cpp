@@ -14,8 +14,8 @@ int main()
 
     int *ptr = &num;
 
-    cout << "Address is : " << ptr << endl;
-    cout << "value is : " << *ptr << endl;
+    cout << "Address is : " << ptr << endl; //it prints the address of num variable
+    cout << "value is : " << *ptr << endl; //it prints the value inside num
 
     double d = 4.3;
     double *p2 = &d;
@@ -56,28 +56,29 @@ int main()
 
     int num = 5;
     int a = num;
-    cout << "a before " << num << endl;
+    cout << "Before increment " << num << endl; //5
     a++;
-    cout << "a after " << num << endl;
+    cout << "After increment " << num << endl; //5
+    //it is coz "num" is not modified, only 'a' is modified. Both are different variables.
 
     int *p = &num;
     cout << "before " << num << endl;
-    (*p)++;
+    (*p)++; // increment the value, which is inside num
     cout << "after " << num << endl;
 
     // copying a pointer
-    int *q = p;
-    cout << p << " - " << q << endl;
-    cout << *p << " - " << *q << endl;
+    int *q = p; //address of q = address of p
+    cout << p << " - " << q << endl; //same address
+    cout << *p << " - " << *q << endl; //same value
 
     // important concept
     int i = 3;
     int *t = &i;
     // cout <<  (*t)++ << endl;
-    *t = *t + 1;
+    *t = *t + 1; // it increment the value, which is pointed by 't'
     cout << *t << endl;
     cout << " before t " << t << endl;
-    t = t + 1;
+    t = t + 1; //it will increment by 4 bytes coz 'int' takes 4 bytes
     cout << " after t " << t << endl;
 
     return 0;
@@ -95,21 +96,21 @@ int main()
     cout << arr[0] << endl;
     cout <<" address of first memory block is " << &arr[0] << endl;
 
-     cout << "4th " << *arr << endl;
-     cout << "5th " << *arr + 1 << endl;
-     cout << "6th " << *(arr + 1) << endl;
-     cout << "7th " << *(arr) + 1 << endl;
+     cout << "4th " << *arr << endl; //prints value inside arr[0]
+     cout << "5th " << *arr + 1 << endl; //increment the value inside arr[0]
+     cout << "6th " << *(arr + 1) << endl; //prints the value present at arr[1]
+     cout << "7th " << *(arr) + 1 << endl; //increment the value inside arr[0]
     cout << "8th " << arr[2] << endl;
-     cout << "9th " << *(arr+2) << endl;
+     cout << "9th " << *(arr+2) << endl; //prints the value present at arr[2]
 
     int i = 3;
-    cout << i[arr] << endl;
+    cout << i[arr] << endl; //prints the value present at arr[3]
 
 
     int temp[10] = {1,2};
-    cout << sizeof(temp) << endl;
-    cout << " 1st " <<  sizeof(*temp) << endl;
-    cout << " 2nd " <<  sizeof(&temp) << endl;
+    cout << sizeof(temp) << endl; // it should be 40bytes coz "int" takes 4 bytes & total number of locations are 10
+    cout << " 1st " <<  sizeof(*temp) << endl; //'int' takes 4bytes
+    cout << " 2nd " <<  sizeof(&temp) << endl; //pointer takes 8bytes
 
     int *ptr = &temp[0];
     cout << sizeof(ptr) << endl ;
@@ -119,8 +120,8 @@ int main()
 
 
     int a[20] = {1,2,3,5};
-    //cout << " ->" << &a[0] << endl;
-   // cout << &a << endl;
+    //cout << " ->" << &a[0] << endl; // All 3 points to the same location
+    //cout << &a << endl;
     //cout << a << endl;
 
     int *p = &a[0];
@@ -133,11 +134,11 @@ int main()
     int arr[10];
 
     // ERROR
-    // arr = arr+1;
+    // arr = arr+1; //we can not do it.
 
     int *ptr = &arr[0];
     cout << ptr << endl;
-    ptr = ptr + 1;
+    ptr = ptr + 1; //it will increment by 4 bytes, coz it is an integer type pointer
     cout << ptr << endl;
 
     return 0;
@@ -151,9 +152,9 @@ int main()
     int arr[5] = {1, 2, 3, 4, 5};
     char ch[6] = "abcde";
 
-    cout << arr << endl;
+    cout << arr << endl; //it will prints the memory address of arr[0]
     // attention here
-    cout << ch << endl;
+    cout << ch << endl; //it will print the entire string, untill it gets a null char.
 
     char *c = &ch[0];
     // prints entire string
@@ -162,7 +163,9 @@ int main()
     char temp = 'z';
     char *p = &temp;
 
-    cout << p << endl;
+    cout << p << endl; //it will print 'z', then it prints the string present in memory coz 
+    // there is not a null char to stop it's execution.So if you want to just print 'z' then we 
+    // have to add a null char in "temp" to terminate the process.
 
     return 0;
 }
@@ -187,7 +190,7 @@ int getSum(int *arr, int n)
 {
 
     cout << endl
-        << "Size : " << sizeof(arr) << endl;
+        << "Size : " << sizeof(arr) << endl; //it prints 8 coz arr is pointed to arr[0] location, which is a address of 8bytes
 
     int sum = 0;
     for (int i = 0; i < n; i++)
@@ -221,13 +224,13 @@ using namespace std;
 void update(int **p2)
 {
     // p2 = p2 + 1;
-    // kuch change hoga  - NO
+    // kuch change hoga  - YES, but the change happened only inside update() function not in main()
 
     //*p2 = *p2 + 1;
-    // kuch change hoga - YES
+    // kuch change hoga - YES & changes happened in main()
 
     **p2 = **p2 + 1;
-    // kuch change hoga - YES
+    // kuch change hoga - YES & changes happened in main()
 }
 void update(int *p)
 {
@@ -244,20 +247,24 @@ int main()
         int* p = &i;
         int** p2 = &p;
 
-        cout<< endl << endl <<" Sab sahi chal rha h " << endl << endl ;
+        cout<< endl <<"Sab sahi chal rha h:-" << endl ;
 
+        //it will print 5 in all 3 cout statements
         cout << i << endl;
         cout << *p << endl;
         cout << **p2 << endl;
 
+        //it will print address of 'i' in all 3 cout statements
         cout << &i << endl;
         cout << p << endl;
         cout << *p2 << endl;
+        cout << endl;
 
+        //it will print address of pointer 'p' in both cout statements
         cout << &p << endl;
         cout << p2 << endl;
 
-        cout << endl << endl;
+        cout << endl;
         cout<< "before " << i << endl;
         cout<< "before " << p << endl;
         cout<< "before " << p2 << endl;
@@ -276,29 +283,30 @@ int main()
     return 0;
 }
 /*
+
 //  Pointer MCQ's
-int first = 8;
-int second = 18;
-int *ptr = &second;
-*ptr = 9;
-cout << first << " " << second << endl;
 
-int first = 6;
-int *p = &first;
-int *q = p;
-(*q)++;
-cout << first << endl;
+    int first = 8;
+    int second = 18;
+    int *ptr = &second;
+    *ptr = 9;
+    cout << first << " " << second << endl;
 
-int first = 8;
-int *p = &first;
-cout << (*p)++ << " ";
-cout << first << endl;
+    int first = 6;
+    int *p = &first;
+    int *q = p;
+    (*q)++;
+    cout << first << endl;
 
-int *p = 0;
-int first = 110;
-*p = first;
-cout << *p << endl;
+    int first = 8;
+    int *p = &first;
+    cout << (*p)++ << " ";
+    cout << first << endl;
 
+    int *p = 0;
+    int first = 110;
+    *p = first;
+    cout << *p << endl;
 
     int first = 8;
     int second = 11;
@@ -313,7 +321,6 @@ cout << *p << endl;
     (*ptr)++;
     *ptr = p;
     cout << *ptr << " " << f << " " << p << endl;
-
 
     int arr[5];
     int *ptr;
@@ -344,7 +351,6 @@ cout << *p << endl;
     ch++;
     cout << *ptr << endl;
 
-
     char arr[] = "abcde";
     char *p = &arr[0];
     cout << p << endl;
@@ -369,7 +375,6 @@ cout << *p << endl;
         cout << i << endl;
     }
 
-
     void fun(int arr[]) {
         cout << arr[0] << " ";
     }
@@ -379,8 +384,6 @@ cout << *p << endl;
         fun(arr + 1);
         cout << arr[0] << endl;
     }
-
-
 
     void update(int *p){
         int a = 70;
@@ -409,7 +412,6 @@ cout << *p << endl;
     int second = (**q)++ + 9;
     cout << first << " " << second << endl;
 
-
     int first = 100;
     int *p = &first;
     int **q = &p;
@@ -429,8 +431,6 @@ cout << *p << endl;
         cout << num << endl;
     }
 
-
-
     int main()
     {
     int arr[] = {41, 52, 36, 74};
@@ -438,7 +438,6 @@ cout << *p << endl;
     cout << *arr + 8;
     return 0;
     }
-
 
     int main()
     {
@@ -449,7 +448,6 @@ cout << *p << endl;
         cout << p;
         return 0;
     }
-
 
     int main()
     {
@@ -472,7 +470,6 @@ cout << *p << endl;
         cout<< ptr2 - ptr1;
         return 0;
     }
-
 
     int main() {
         char st[] = "ABCD";
@@ -504,7 +501,6 @@ cout << *p << endl;
         return 0;
     }
 
-
     int main()
     {
         int ***r, **q, *p, i=8;
@@ -516,7 +512,6 @@ cout << *p << endl;
         cout<<*p << " " <<**q << " "<<***r;
         return 0;
     }
-
 
     int f(int x, int *py, int **ppz) {
         int y, z;
