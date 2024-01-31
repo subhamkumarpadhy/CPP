@@ -104,8 +104,10 @@ using namespace std;
 int main()
 {
     int row, col;
-    cout << "Enter row & col:";
-    cin >> row >> col;
+    cout << "Enter the number of rows: ";
+    cin >> rows;
+    cout << "Enter the number of columns: ";
+    cin >> cols;
 
     // creating a 2D array
     int **arr = new int *[row];
