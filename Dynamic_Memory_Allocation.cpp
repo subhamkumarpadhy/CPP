@@ -110,10 +110,10 @@ int main()
     cin >> cols;
 
     // creating a 2D array
-    int **arr = new int *[row];
+    int **arr = new int *[row]; //Generating rows
     for (int i = 0; i < row; i++)
     {
-        arr[i] = new int[col];
+        arr[i] = new int[col]; //Generating columns for each row
     }
 
     // taking input
