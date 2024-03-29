@@ -77,8 +77,6 @@ public:
     }
 };
 
-
-
 // Q. Diameter of a binary tree
 
 /*
@@ -123,8 +121,6 @@ public:
         return diameterFast(root).first;
     }
 };
-
-
 
 // Q. check for balanced tree
 
@@ -181,7 +177,6 @@ public:
     }
 };
 
-
 // Q. Determine if Two Trees are Identical
 
 /*
@@ -190,7 +185,7 @@ struct Node
     int data;
     struct Node* left;
     struct Node* right;
-    
+
     Node(int x){
         data = x;
         left = right = NULL;
@@ -200,34 +195,38 @@ struct Node
 
 class Solution
 {
-    public:
+public:
     bool isIdentical(Node *r1, Node *r2)
     {
-        //base cases
-        if(r1 == NULL && r2 == NULL) {
+        // base cases
+        if (r1 == NULL && r2 == NULL)
+        {
             return true;
         }
-        if(r1 == NULL && r2 != NULL) {
+        if (r1 == NULL && r2 != NULL)
+        {
             return false;
         }
-        if(r1 != NULL && r2 == NULL) {
+        if (r1 != NULL && r2 == NULL)
+        {
             return false;
         }
-        
-        bool left = isIdentical(r1 -> left, r2 -> left);
-        bool right = isIdentical(r1 -> right, r2 -> right);
-        
-        bool value = r1 -> data == r2 -> data;
-        
-        if(left && right && value) {
+
+        bool left = isIdentical(r1->left, r2->left);
+        bool right = isIdentical(r1->right, r2->right);
+
+        bool value = r1->data == r2->data;
+
+        if (left && right && value)
+        {
             return true;
         }
-        else {
+        else
+        {
             return false;
         }
     }
 };
-
 
 // Q.Sum Tree
 
@@ -241,43 +240,196 @@ struct Node
 
 class Solution
 {
-    public:
-    pair<bool, int> isSumTreeFast(Node* root) {
-        //base case
-        if(root == NULL) {
+public:
+    pair<bool, int> isSumTreeFast(Node *root)
+    {
+        // base case
+        if (root == NULL)
+        {
             pair<bool, int> p = make_pair(true, 0);
             return p;
         }
-        
-        if(root -> left == NULL && root -> right == NULL) {
-            pair<bool, int> p = make_pair(true, root -> data);
+
+        if (root->left == NULL && root->right == NULL)
+        {
+            pair<bool, int> p = make_pair(true, root->data);
             return p;
         }
-        
-        pair<bool, int> leftAns = isSumTreeFast(root -> left);
-        pair<bool, int> rightAns = isSumTreeFast(root -> right);
-        
+
+        pair<bool, int> leftAns = isSumTreeFast(root->left);
+        pair<bool, int> rightAns = isSumTreeFast(root->right);
+
         bool isLeftSumTree = leftAns.first;
         bool isRightSumTree = rightAns.first;
-        
+
         int leftSum = leftAns.second;
         int rightSum = rightAns.second;
-        
-        bool condn = root -> data == leftSum + rightSum;
-        
+
+        bool condn = root->data == leftSum + rightSum;
+
         pair<bool, int> ans;
-        
-        if(isLeftSumTree && isRightSumTree && condn) {
+
+        if (isLeftSumTree && isRightSumTree && condn)
+        {
             ans.first = true;
-            ans.second = root -> data + leftSum + rightSum;
+            ans.second = root->data + leftSum + rightSum;
         }
-        else {
+        else
+        {
             ans.first = false;
         }
         return ans;
     }
-    bool isSumTree(Node* root)
+    bool isSumTree(Node *root)
     {
         return isSumTreeFast(root).first;
+    }
+};
+
+// Q. ZigZag Tree Traversal
+/*
+struct Node
+{
+    int data;
+    Node *left;
+    Node *right;
+
+    Node(int val)
+    {
+        data = val;
+        left = right = NULL;
+    }
+};
+*/
+class Solution
+{
+public:
+    // Function to store the zig zag order traversal of tree in a list.
+    vector<int> zigZagTraversal(Node *root)
+    {
+        vector<int> result;
+        if (root == NULL)
+        {
+            return result;
+        }
+
+        queue<Node *> q;
+        q.push(root);
+
+        bool leftToRight = true;
+
+        while (!q.empty())
+        {
+
+            int size = q.size();
+            vector<int> ans(size);
+
+            // level process
+            for (int i = 0; i < size; i++)
+            {
+
+                Node *frontNode = q.front();
+                q.pop();
+
+                // normal insert or reverse insert
+                int index = leftToRight ? i : size - i - 1;
+                ans[index] = frontNode->data;
+
+                if (frontNode->left)
+                {
+                    q.push(frontNode->left);
+                }
+
+                if (frontNode->right)
+                {
+                    q.push(frontNode->right);
+                }
+            }
+
+            // direction change karna heee
+            leftToRight = !leftToRight;
+
+            for (auto i : ans)
+            {
+                result.push_back(i);
+            }
+        }
+        return result;
+    }
+};
+
+// Q. Boundary Traversal of binary tree
+
+/*
+struct Node
+{
+    int data;
+    Node* left, * right;
+};
+*/
+
+class Solution
+{
+public:
+    void traverseLeft(Node *root, vector<int> &ans)
+    {
+        // base case
+        if (root == NULL || (root->left == NULL && root->right == NULL))
+            return;
+        ans.push_back(root->data);
+        if (root->left)
+            traverseLeft(root->left, ans);
+        else
+            traverseLeft(root->right, ans);
+    }
+    void traverseLeaf(Node *root, vector<int> &ans)
+    {
+        // base case
+        if (root == NULL)
+            return;
+        if (root->left == NULL && root->right == NULL)
+        {
+            ans.push_back(root->data);
+            return;
+        }
+        traverseLeaf(root->left, ans);
+        traverseLeaf(root->right, ans);
+    }
+    void traverseRight(Node *root, vector<int> &ans)
+    {
+        // base case
+        if (root == NULL || (root->left == NULL && root->right == NULL))
+            return;
+        if (root->right)
+            traverseRight(root->right, ans);
+        else
+            traverseRight(root->left, ans);
+        // wapas aagaye
+        ans.push_back(root->data);
+    }
+    vector<int> boundary(Node *root)
+    {
+        vector<int> ans;
+        if (root == NULL)
+        {
+            return ans;
+        }
+
+        ans.push_back(root->data);
+
+        // left part print karo
+        traverseLeft(root->left, ans);
+
+        // traverse leaf nodes
+
+        // left subtree
+        traverseLeaf(root->left, ans);
+        // right subtree
+        traverseLeaf(root->right, ans);
+
+        // traverse right part
+        traverseRight(root->right, ans);
+
+        return ans;
     }
 };
