@@ -435,6 +435,8 @@ public:
 };
 
 // Q. Vertical Traversal of Binary Tree
+
+// Without Recursion
 vector<int> verticalOrder(Node *root)
 {
     map<int, map<int, vector<int>>> nodes;
@@ -479,6 +481,33 @@ vector<int> verticalOrder(Node *root)
                     ans.push_back(k);
                 }
             }
+        }
+    }
+    return ans;
+}
+
+// with Recursion
+void verticalTraversal(Node *root, int index, int level, map<int, map<int, vector<int>>> &mp)
+{
+    if (root == NULL)
+        return;
+
+    mp[index][level].push_back(root->data);
+    verticalTraversal(root->left, index - 1, level + 1, mp);
+    verticalTraversal(root->right, index + 1, level + 1, mp);
+}
+vector<int> verticalOrder(Node *root)
+{
+    map<int, map<int, vector<int>>> mp;
+    verticalTraversal(root, 0, 0, mp);
+    vector<int> ans;
+
+    for (auto i : mp)
+    {
+        for (auto j : i.second)
+        {
+            for (auto val : j.second)
+                ans.push_back(val);
         }
     }
     return ans;
