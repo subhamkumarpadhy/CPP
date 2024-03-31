@@ -434,7 +434,7 @@ public:
     }
 };
 
-// Q. Vertical Traversal od Binary Tree
+// Q. Vertical Traversal of Binary Tree
 vector<int> verticalOrder(Node *root)
 {
     map<int, map<int, vector<int>>> nodes;
