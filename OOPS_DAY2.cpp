@@ -15,17 +15,17 @@ Q. Why Encapsulation?
 
 --> Mode of inheritance:     Base class      Child class      Access possible or not
 
-                        public             public             public
-                        public             private            private
-                        public             protected          protected
+                            public             public             public
+                            public             private            private
+                            public             protected          protected
 
-                        protected          public             protected
-                        protected          private            protected
-                        protected          protected          private
+                            protected          public             protected
+                            protected          private            private
+                            protected          protected          protected
 
-                        private            public             Can't access
-                        private            private            Can't access
-                        private            protected          Can't access
+                            private            public             Can't access
+                            private            private            Can't access
+                            private            protected          Can't access
 
 --> Types of inheritance: Single :- One child class is inherited from the base class.
                             
@@ -45,7 +45,7 @@ Q. What is Inheritance Ambiguity?
 3. Polymorphism : When one thing is implemented as multiple things then, it is known as Polymorphism.
                     It is of 2 types: Static / Complie Time Polymorphism & Dynamic / Run Time Polymorphism.
 
---> Function overloading: Same name of the function but, the return type or input parameter differ.
+--> Function overloading: Same name of the function but, input parameter must differ or else you can change the return type also.
 --> Operator overloading: Refer documentation. Ex: Below
 
 --> Method Overriding: Same name, input parameter of the function but different implementation. It dependes on the inheritance.
